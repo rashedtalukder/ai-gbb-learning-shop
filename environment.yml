@@ -1,0 +1,11 @@
+name: ai-gbb-workshop
+channels:
+  - conda-forge
+  - defaults
+  - jupyter
+dependencies:
+  - python=3.11
+  - pip
+  - ipykernel
+  - pip:
+    - -r ./function_completion/requirements.txt
