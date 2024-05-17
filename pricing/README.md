@@ -65,3 +65,29 @@ You should see a few things the the URL path. The endpoint **chat** is the name 
 
 Now, let's give a quick string to test our ChatGPT completions endpoint by adding `&prompt=hello` to the very end of the URL. 
 It'll look something like `https://<your function name>.azurewebsites.net/api/chat?code=<your access token>&prompt=hello`
+
+## Gather Metrics and Calculate Pricing
+
+### Functions Costing
+For Azure Functions and many other services, you can attach Application Insights feature of Azure Monitor. This was done when you first set up the Function App (remember?). Application Insights lets you run a number of rich queries that isn't readily available in the standard metrics set for Azure Monitor.
+
+You'll be looking at pricing based on the [Azure Function Apps consumption plan pricing table](https://azure.microsoft.com/en-us/pricing/details/functions/#pricing). Be sure the correct region is selected to match where you are deployed.
+
+To view the application insights,
+1) From Azure Tools **RESOURCES** pane, select your function name and *right* click it. Then click **Open in Portal*.
+2) Under the **Functions** tab on the main pane, click the link to your function's name.
+3) Click **Invocations**
+4) Click **Open in Application Insights**
+5) In the query textbox, remove the line that says `Take 20`. That will truncate to just the most recent 20 recents.
+
+This query will give you all the requests over the past 30 days. You can export this and calculate the total duration and number of invocations.
+
+#### Challenge
+Write the query that provides the count and the total execution time.
+
+### Azure OpenAI Cost Insights
+[Azure OpenAI's (AOAI) pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/#pricing) is based on model, input tokens, and output tokens. We can go to the Azure Portal dashboard for your AOAI service and select the **Metrics** menu item. From there, we need to select the sum of **Generated Completion Tokens** and then add another metric for **Processed Prompt Tokens**.
+
+## Further Reading
+https://techcommunity.microsoft.com/t5/fasttrack-for-azure/azure-openai-insights-monitoring-ai-with-confidence/ba-p/4026850
+https://learn.microsoft.com/en-us/azure/architecture/ai-ml/openai/architecture/log-monitor-azure-openai
