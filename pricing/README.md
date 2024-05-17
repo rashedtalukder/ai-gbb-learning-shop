@@ -66,6 +66,8 @@ You should see a few things the the URL path. The endpoint **chat** is the name 
 Now, let's give a quick string to test our ChatGPT completions endpoint by adding `&prompt=hello` to the very end of the URL. 
 It'll look something like `https://<your function name>.azurewebsites.net/api/chat?code=<your access token>&prompt=hello`
 
+We can send many requests using the little script in the file **prompt_ddos.py**. Go to the **pricing** folder (one level up) and run the command `python prompt_ddos.py`. Input the items the script asks for. Recommend at least 20 requests.
+
 ## Gather Metrics and Calculate Pricing
 
 ### Functions Costing
