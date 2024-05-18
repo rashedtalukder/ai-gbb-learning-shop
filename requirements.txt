@@ -1,0 +1,4 @@
+azure-functions
+azure-identity
+azure-monitor-query
+openai

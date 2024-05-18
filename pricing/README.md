@@ -90,6 +90,18 @@ Write the query that provides the count and the total execution time.
 ### Azure OpenAI Cost Insights
 [Azure OpenAI's (AOAI) pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/#pricing) is based on model, input tokens, and output tokens. We can go to the Azure Portal dashboard for your AOAI service and select the **Metrics** menu item. From there, we need to select the sum of **Generated Completion Tokens** and then add another metric for **Processed Prompt Tokens**.
 
+### Calculating Azure OpenAI Invocations in Function App Costs
+Since the Function App logs include the token counts for each invocation, you can retrieve the logs to then calculate the actual cost of each chat session and compare that to what gets billed. There is an example in  **pricing\app_insights.py**. It has two methods demonstrating querying available metrics and also logs in App Insights. To retrieve your data, you need your App Insights resource Id:
+
+1) Go to the Azure Tools extension and go to your Function App in the **RESOURCES** pane.
+2) *Right* click on the name of your function and select **View Properties**.
+3) Copy the value under `Site.tags.["hidden-link: /app-insights-resource-id"]`.
+4) Paste that in the file **app_insights.py** for the variable **APP_INSIGHTS_RESOURCE_ID**
+5) Run the app by going to the terminal window and the **pricing** folder and entering the command `python app_insights.py`
+
+## Hack Away!
+With the remaining time, scope a possible use case with what you've learned so far. You could, for example, use the Assistants API to generate code to graph the data and take user inputs to manipulate the data.
+
 ## Further Reading
 https://techcommunity.microsoft.com/t5/fasttrack-for-azure/azure-openai-insights-monitoring-ai-with-confidence/ba-p/4026850
 https://learn.microsoft.com/en-us/azure/architecture/ai-ml/openai/architecture/log-monitor-azure-openai

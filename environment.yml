@@ -8,4 +8,4 @@ dependencies:
   - pip
   - ipykernel
   - pip:
-    - -r ./function_completion/requirements.txt
+    - -r ./requirements.txt
