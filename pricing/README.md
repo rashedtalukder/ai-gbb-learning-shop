@@ -25,6 +25,9 @@ Install by following the official guide [here](https://learn.microsoft.com/en-us
 
 Then sign in with the command `az login`.
 
+### Azure Core Tools install
+Follow the instructions in the [official docs](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-python)
+
 ### Configure VS Code Azure Tools Extension
 After installing [Azure Tools VSCode extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack), look for the new Azure logo on the left navigation in VS Code. Once you click it, it will have an option to sign in to Azure in the left browsing pane.
 
@@ -51,7 +54,7 @@ Open the file **pricing\function_completion\local.settings.json**. Add your own 
 "AZURE_OPENAI_API_KEY" : "",
 "AZURE_OPENAI_ENDPOINT: "",
 "AZURE_OPENAI_CHAT_DEPLOYMENT" : "",
-"AZURE_OPENAI_API_VERSION" : "",
+"AZURE_OPENAI_API_VERSION" : "2024-02-01",
 ```
 
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
