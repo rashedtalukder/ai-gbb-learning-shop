@@ -25,6 +25,11 @@ Install by following the official guide [here](https://learn.microsoft.com/en-us
 
 Then sign in with the command `az login`.
 
+Add your subscription configuration using the command below and replacing your subsciption id or name:
+```
+az account set --subscription <name or id>
+```
+
 ### Azure Core Tools install
 Follow the instructions in the [official docs](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-python)
 
