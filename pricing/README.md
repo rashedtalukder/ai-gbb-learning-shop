@@ -56,7 +56,7 @@ Open the file **pricing\function_completion\local.settings.json**. Add your own 
 "AZURE_OPENAI_CHAT_DEPLOYMENT" : "",
 "AZURE_OPENAI_API_VERSION" : "2024-02-01",
 ```
-
+Go to the **pricing\function_completion** directory.
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
 
 ### Publish Function App and Environmental Variables
