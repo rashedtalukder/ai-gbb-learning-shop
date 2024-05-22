@@ -47,10 +47,12 @@ From the Azure Tools extension, under **RESOURCES**, open your subscription, ope
 
 ### Add Your OpenAI Configs to Env Variables
 Open the file **pricing\function_completion\local.settings.json**. Add your own values for the following variable keys to the JSON file:
-AZURE_OPENAI_API_KEY
-AZURE_OPENAI_ENDPOINT
-AZURE_OPENAI_CHAT_DEPLOYMENT
-AZURE_OPENAI_API_VERSION
+```
+"AZURE_OPENAI_API_KEY" : "",
+"AZURE_OPENAI_ENDPOINT: "",
+"AZURE_OPENAI_CHAT_DEPLOYMENT" : "",
+"AZURE_OPENAI_API_VERSION" : "",
+```
 
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
 
