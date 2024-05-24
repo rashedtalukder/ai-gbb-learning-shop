@@ -108,8 +108,8 @@ def calculate_aoai_cost():
 
     # Assuming GPT4-Turbo $0.01 input and $0.03 output per 1000 tokens
     print(f"""
-    Total input tokens cost: ${aggregate_input_tokens/1000*0.01}
-    Total output tokens cost: ${aggregate_output_tokens/1000*0.03}
+    Total input tokens cost: ${aggregate_input_tokens/(1000*0.01)}
+    Total output tokens cost: ${aggregate_output_tokens/(1000*0.03)}
     """)
 
 def main():

@@ -54,12 +54,25 @@ It's easiest to do this via the Azure Tools extension.
 From the Azure Tools extension, under **RESOURCES**, open your subscription, open **Function App**, open your function app's name, then *right* click **Application Settings**, **Download Remote Settings**.
 
 ### Add Your OpenAI Configs to Env Variables
-Open the file **pricing\function_completion\local.settings.json**. Add your own values for the following variable keys to the JSON file:
+The app currently doesn't know how to access Azure OpenAI service without the configuration details. You can add each of the neccessary details:
+
+Add your Azure OpenAI API Key by pasting the following, pressing enter and then it'll ask you to paste in the key itself.
 ```
-"AZURE_OPENAI_API_KEY" : "",
-"AZURE_OPENAI_ENDPOINT: "",
-"AZURE_OPENAI_CHAT_DEPLOYMENT" : "",
-"AZURE_OPENAI_API_VERSION" : "2024-02-01",
+func settings add AZURE_OPENAI_API_KEY
+```
+
+Add your Azure OpenAI endpoint URL by pasting the following, pressing enter and then it'll ask you to paste in the endpoint URL.
+```
+func settings add AZURE_OPENAI_ENDPOINT
+```
+Add your Azure OpenAI chat model name by pasting the following, pressing enter and then it'll ask you to paste in the deployment model name.
+```
+func settings add AZURE_OPENAI_CHAT_DEPLOYMENT
+```
+
+Lastly, add the API version which should be **2024-02-01** after pasting the command into terminal
+```
+func settings add AZURE_OPENAI_API_VERSION 2024-02-01
 ```
 Go to the **pricing\function_completion** directory.
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
