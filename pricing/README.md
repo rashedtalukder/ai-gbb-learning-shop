@@ -12,18 +12,18 @@
 Miniconda is a great way to manage your python virtual environments and the dependencies for your application. These virtual environments help isolate one application from another as you develop them. Imagine a scenario where you have two packages named "OpenAI" but you needed one version for one app, and another for this one. How would you or the apps know? If they got mixed up for some reason, you could get unintended consequences.
 
 To install miniconda and start up an environment with the necessary version of Python and required dependencies:
-1. Download and install from: https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
-2. Restart computer
-3. Open Visual Studio Code, open terminal window
+1. Download and install from: https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe.
+2. Restart your computer.
+3. Open Visual Studio Code, press **Control**+**Shift**+**P**, and select **Python: Select Interpreter**, then select the item in the list that has "miniconda" in the path.
 4. Create a new conda virtual environment using `conda env create -f environment.yml` into terminal window.
-5. Activate the environment `conda activate ai-gbb-workshop`
+5. Activate the environment `conda activate ai-gbb-workshop`.
 
 ### Azure CLI install & configuration
 The Command Line Interface (CLI) simplifies managing your Azure services and makes it possible to be systematic. Most all developers will use these types of tools instead of the UI.
 
 Install by following the official guide [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli)
 
-Then sign in with the command `az login`.
+Then sign in to Azure in Terminal with the command `az login`.
 
 Add your subscription configuration using the command below and replacing your subsciption id or name:
 ```
