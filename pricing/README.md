@@ -15,8 +15,9 @@ To install miniconda and start up an environment with the necessary version of P
 1. Download and install from: https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe.
 2. Restart your computer.
 3. Open Visual Studio Code, press **Control**+**Shift**+**P**, and select **Python: Select Interpreter**, then select the item in the list that has "miniconda" in the path.
-4. Create a new conda virtual environment using `conda env create -f environment.yml` into terminal window.
-5. Activate the environment `conda activate ai-gbb-workshop`.
+4. Open a new terminal window by going to the top navigation bar, selecting **Terminal** and then **New Terminal**.
+5. Create a new conda virtual environment using `conda env create -f environment.yml` into terminal window.
+6. After it's created and everything has been installed, activate the environment `conda activate ai-gbb-workshop`.
 
 ### Azure CLI install & configuration
 The Command Line Interface (CLI) simplifies managing your Azure services and makes it possible to be systematic. Most all developers will use these types of tools instead of the UI.
