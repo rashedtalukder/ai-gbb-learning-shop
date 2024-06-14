@@ -75,7 +75,7 @@ Lastly, add the API version which should be **2024-02-01** after pasting the com
 ```
 func settings add AZURE_OPENAI_API_VERSION 2024-02-01
 ```
-Go to the **pricing\function_completion** directory.
+Go to the **pricing\function_apps** directory.
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
 
 ### Publish Function App and Environmental Variables
@@ -86,7 +86,7 @@ In terminal, paste the following and replace `<function app name>` with your fun
 `func azure functionapp publish <function app name> --python --publish-local-settings -i`
 
 ### Test the Deployed Function
-From the Azure Tool's **RESOURCES** pane, go to the **Function App**, your function name, expand **Functions**, and then right click the name of the function that gets invoked called **function-completion**. Select **Copy function URL**. Paste this URL into the browser.
+From the Azure Tool's **RESOURCES** pane, go to the **Function App**, your function name, expand **Functions**, and then right click the name of the function that gets invoked called **function-apps**. Select **Copy function URL**. Paste this URL into the browser.
 
 You should see a few things the the URL path. The endpoint **chat** is the name of route in the code. That's followed by a string with the key **code**. This is the equivalent to an access token that this type of function has. If you remove the code or change it, you'll find it doesn't work. Go ahead, press enter and see the response.
 
