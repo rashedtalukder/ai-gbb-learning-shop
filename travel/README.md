@@ -25,7 +25,13 @@ As long as you're using a compatible Azure OpenAI model and haven't rotated keys
 
 So for the parameter **AZURE_OPENAI_API_VERSION**, replace the string with `2024-05-01-preview`.
 
-Re-encrypt your local settings so you don't accidentally share it with someone and have it exposed by going back to terminal and issuing the command `func settings encrypt`
+Re-encrypt your local settings so you don't accidentally share it with someone and have it exposed by going back to terminal and issuing the command `func settings encrypt`. 
+
+Reupload the change by:
+1) Going to Azure Tools extension.
+2) *Right click* **Application settings**.
+3) Click **Upload local settings**.
+4) This will then ask to overwrite the value, select yes.
 
 ## File and Code Review
 Looking at the file structure contents, you can see that there is a **travel\data** folder with two files. One is a PDF that contains a brochure and a CSV that contains fake flight travel times from different airports. If you want to inspect these, feel free to _right click_ and select **Reveal in File Explorer** to then open it with other apps.

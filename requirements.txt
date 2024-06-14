@@ -2,4 +2,4 @@ azure-functions
 azure-identity
 azure-monitor-query
 openai
-requests~=2.23.0
+requests~=2.32.3

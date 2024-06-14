@@ -57,6 +57,7 @@ From the Azure Tools extension, under **RESOURCES**, open your subscription, ope
 ### Add Your OpenAI Configs to Env Variables
 The app currently doesn't know how to access Azure OpenAI service without the configuration details. You can add each of the neccessary details:
 
+
 Add your Azure OpenAI API Key by pasting the following, pressing enter and then it'll ask you to paste in the key itself.
 ```
 func settings add AZURE_OPENAI_API_KEY
@@ -77,6 +78,8 @@ func settings add AZURE_OPENAI_API_VERSION 2024-02-01
 ```
 Go to the **pricing\function_apps** directory.
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
+
+To upload these settings, to your deployment from the Azure Tools extension, under **RESOURCES**, open your subscription, open **Function App**, open your function app's name, then *right* click **Application Settings**, **Upload Local Settings**.
 
 ### Publish Function App and Environmental Variables
 You can _right click_ the **pricing/function_apps** folder, select **Deploy to Function App**, select the resource group you're using.
