@@ -79,6 +79,9 @@ Go to the **pricing\function_completion** directory.
 Encrypt these before sending over the internet using `func settings encrypt`. Note that this doesn't keep them encrypted in Azure. You'll need to use key vault for that instead. This just encrypts it locally and in flight.
 
 ### Publish Function App and Environmental Variables
+You can _right click_ the **pricing/function_apps** folder, select **Deploy to Function App**, select the resource group you're using.
+
+If you're l33t, you can use terminal. If you did it with the instructions above, ignore this. This is a good reference for building automated pipelines.
 In terminal, paste the following and replace `<function app name>` with your function app's name and no brackets:
 `func azure functionapp publish <function app name> --python --publish-local-settings -i`
 
