@@ -1,0 +1,67 @@
+{
+  "package": {},
+  "code": {
+    "hello.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "function": "my_python_tool"
+    },
+    "python_node_w1kb.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "python_node_w1kb.py",
+      "function": "my_python_tool"
+    },
+    "llm_node.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "text": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "llm_node.jinja2"
+    },
+    "my_prompt.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "poem": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "my_prompt.jinja2"
+    },
+    "get_current_season.py": {
+      "type": "python",
+      "source": "get_current_season.py",
+      "function": "get_season"
+    },
+    "python_node_lj4z.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "python_node_lj4z.py",
+      "function": "my_python_tool"
+    }
+  }
+}
