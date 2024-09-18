@@ -1,0 +1,51 @@
+{
+  "package": {},
+  "code": {
+    "hello.jinja2": {
+      "type": "prompt",
+      "inputs": {
+        "text": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "description": "Please replace the template with your own prompt.",
+      "source": "hello.jinja2"
+    },
+    "hello.py": {
+      "type": "python",
+      "inputs": {
+        "input1": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "hello.py",
+      "function": "my_python_tool"
+    },
+    "sk_rag_on_sql_planner.py": {
+      "type": "python",
+      "inputs": {
+        "ask": {
+          "type": [
+            "string"
+          ]
+        },
+        "aoai_deployment": {
+          "type": [
+            "string"
+          ]
+        },
+        "conn": {
+          "type": [
+            "CustomConnection"
+          ]
+        }
+      },
+      "source": "sk_rag_on_sql_planner.py",
+      "function": "my_python_tool"
+    }
+  }
+}

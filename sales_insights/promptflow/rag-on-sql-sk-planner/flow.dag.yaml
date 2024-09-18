@@ -1,0 +1,25 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  question:
+    type: string
+    default: Give me the name of the best seller in terms of sales volume in the
+      whole period
+outputs:
+  answer:
+    type: string
+    reference: ${sk_rag_on_sql_planner.result}
+  steps:
+    type: string
+    reference: ${sk_rag_on_sql_planner.steps}
+nodes:
+- name: sk_rag_on_sql_planner
+  type: python
+  source:
+    type: code
+    path: sk_rag_on_sql_planner.py
+  inputs:
+    conn: custom_connection
+    ask: ${inputs.question}
+    aoai_deployment: gpt-4
