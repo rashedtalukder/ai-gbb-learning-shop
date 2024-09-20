@@ -2,8 +2,11 @@
 
 ## This workshop will focus on below customer use-case:
 
-A contoso company would like to buid and AI Assistant that can be used by their non technical business users to get information on their product sales data residing in a SQL database using a natural language interaction. So for the purpose of this workshop we will use an Azure SQL databse which will host some sample product sales data that we will query with natural language using SK and the power of LLMs.  
+A contoso company wants to build an AI Assistant which can be used by their non technical business users to get information on their product sales data. The data resides in a SQL database and the business users wants to analyze that data using natural language queries as they might not have the technical expertise to write T-SQL queries. They also want to the results to be summarized in plain text. 
 
+So, for the purpose of this workshop we will use an Azure SQL databse which will host some sample product sales data that we will query with natural language using Semantic Kernel Pipeline and the power of LLMs.  
+
+## Semantic Kernel Overview and the workshop setup details
 In this reworkshop we demonstrate how to use [Semantic Kernel](https://github.com/microsoft/semantic-kernel) to convert Natural Language (NL) to SQL Query using Azure OpenAI (GPT-4 model).
 
 Semantic Kernel is an exciting framework and a powerful tool that can be used for several applications, including chatbots, virtual assistants, and more. 
@@ -43,6 +46,8 @@ The final result is a system that can convert Natural Language (NL) to SQL Query
 - Once got approved create an Azure OpenAI in you Azure's subcription.
 - Python 3.11
 - You must have an Azure SQL Database with the tables and data you want to query. In this repo, we will use the a Sample database with some tables.
+
+## Azure SQL DB Setup with sample data
 - You can use [generate-sample-sql-data](sql-data/generate-sample-sql-data.py) script to create and populate the tables with some sample data.
 - Make sure you use both SQL Authentication and Microsoft Entra suthentication for your SQL Server for the purpose of this demo. You can disable Microsoft Entra auth only option under settings --> Microsoft Entra ID. Just uncheck the "Support only Microsoft Entra authentication for this server" option. 
 
@@ -64,7 +69,7 @@ Faker==23.2.1
 pyodbc==5.1.0
 ```
 
-## Create .env file
+## Create .env file (Rename any sample.env)
 
 ```
 CONNECTION_STRING=
@@ -73,7 +78,7 @@ AZURE_OPENAI_ENDPOINT=
 AZURE_OPENAI_API_KEY=
 ```
 
-*Make sure that the CONNECTION_STRING you pick is the one for the ODBC connection. It should start with Driver={ODBC Driver 18 for SQL Server};
+*Make sure that the CONNECTION_STRING you pick is the one for the ODBC connection. It should start with Driver={ODBC Driver 18 for SQL Server}; You can find the connection string under your <Azure SQL Database> --> Settings --> Connection strings --> ODBC
 
 ## Quick Start
 
@@ -115,12 +120,17 @@ Feel free to adapt the code to your own data. You can use your own data and modi
 ## Bonus Excersise: Create Prompt Flow to run and evaluate Semantic Kernal Planner
 Once the setup is complete, you can conveniently convert your existing Semantic Kernel planner to a prompt flow by following the steps below:
 
-- Create a folder "promptflow" under the current directory. You can name the folder of your choice
+- An existing promptflow is already created for you under folder "promptflow/rag-on-sql-planner"
+- If you go to your VSCode left nav under PrompFlow (P), you should see an existing promptflow under Flows
+- If you are not able to see that, then you can create a new flow using the below steps:
+### Follow these steps if you are not able use existing flow to create new one
 - Right click the folder and select new flow in this directory and create a blank or standard flow
 - Select the + Python icon to create a new Python node.
 - Name it "rag-on-sql-sk-planner" or the planner name of your choice
 - use the sk_rag_on_sql_planner.py as the code file
 - copy the "plugins" directory from the project root directory here to use the plugins as reference
+
+### Setup custom connection to use Azure Open AI service and SQL Connection String
 - create a custom connetion and name it "custom_connection"
 - Add "AZURE_OPENAI_API_BASE", "AZURE_OPENAI_API_KEY" and "SQL_CONNECTION_STRING" to the custom connection and save it. 
 - Define the input and output of the planner node.

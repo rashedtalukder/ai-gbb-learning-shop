@@ -47,9 +47,18 @@ async def my_python_tool(ask: str, aoai_deployment: str, conn: CustomConnection)
  
     # Invoke the plan and get the result
     result = await plan.invoke(kernel=kernel)
-    steps = [("Description:", step.description, "Function: " , step.plugin_name + "." + step._function.name) for step in plan._steps]  
-    answer = to_json(result)    
-    return_value = {"result": answer, "steps": steps}
+    steps = []
+    # Build the steps list for output
+    for index, step in enumerate(plan._steps):
+        steps.append("step: " + str(index))
+        steps.append("Description: " + step.description)
+        steps.append("Function: " + step.plugin_name + "." + step._function.name)        
+        if len(step._outputs) > 0:
+            steps.append("output:\n" + str.replace(result[step._outputs[0]] , "\n", "\n"))           
+
+    #steps = [("Description:", step.description, "Function: " , step.plugin_name + "." + step._function.name) for step in plan._steps]  
+    answer = to_json(result.result)    
+    return_value = {"result": answer, "steps": steps}   
   
     return return_value
 
