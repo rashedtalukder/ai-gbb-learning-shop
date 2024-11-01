@@ -15,9 +15,11 @@ Under the Compute Tab, go to Compute Instances and create a new Compute Instance
 
 In order to proceed, you'll need to download an install the AML extension for VSCode [here](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.vscode-ai). This will allow you to run the fine-tuning notebook remotely on an AzureML Compute Instance and not burden your local laptop's resources.
 
-We'll now have to login to the proper subscription and select the right workspace for the job. Navigate to the *Phi-3-finetune-lora-python.ipynb* file, click *Select Kernel* in the top right, then click *Azure ML Compute Instances* - this will ask you to sign into your Microsoft account, so allow the necessary permissions and proceed with login in your browser. Once back in VS Code, select your **MCAPS** subscription from the list, then select the **Workspace** you created in the last step. Lastly, select the **Compute Instance** that we created in the prior step.
+We'll now have to login to the proper subscription and select the right workspace for the job. Navigate to the *~1-ExploreData.ipynb~* file, click *Select Kernel* in the top right, then click *Azure ML Compute Instances* - this will ask you to sign into your Microsoft account, so allow the necessary permissions and proceed with login in your browser. Once back in VS Code, select your **MCAPS** subscription from the list, then select the **Workspace** you created in the last step. Lastly, select the **Compute Instance** that we created in the prior step.
 
 Now you can run through the notebook without burdening your laptop!
+
+We'll run through ~1-ExploreData.ipynb & ~2-TrainModel.ipynb while we wait for our model to fine-tune...
 
 ### Data Asset Upload
 
