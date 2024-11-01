@@ -23,7 +23,7 @@ We'll run through ~1-ExploreData.ipynb & ~2-TrainModel.ipynb while we wait for o
 
 ### Data Asset Upload
 
-If the prior notebook won't run, go ahead and directly upload "medquadshort.jsonl" to your Datastore by selecting the Data tab under Assets, then Create, then "From Local Files", select the file, keep the default workspaceblobstore checked, then continue with the upload.
+Go ahead and directly upload "medquadshort.jsonl" to your Datastore by selecting the Data tab under Assets, then Create, then "From Local Files", select the file, keep the default workspaceblobstore checked, then continue with the upload.
 
 ### Fine-Tuning Job
 
