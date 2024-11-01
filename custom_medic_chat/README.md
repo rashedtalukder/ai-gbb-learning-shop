@@ -8,7 +8,7 @@ In this workshop, we'll cover an overview of Azure Machine Learning and try our 
     - For Microsoft internal: Verify you're in the correct directory by clicking your profile picture in the top right and verify/switch your **Directory** to *Microsoft Non-Production*.
 - Next, select **Workspaces** and create a new one. This can reside in the Resource Group of your choosing, but set the Region to East US 2 (this region choice is necessary for fine-tuning Phi-3).
 
-Once your Workspace is created, go into the **Data** tab and under **Data Assets**, click **Create**. Name your asset `medquad_csv` and keep the type as **File** (uri_file). Hit next, then choose **From Local Files**. WorkspaceBlobStore should be checked -- keep it that way and select **Next** again. Go ahead and upload the repo's `custom_medic_chat/MaaS/medquad.jsonl` file here. Once created, go into the **Data Asset** and copy the **Datastore URI** -- this will be handy for our next step.
+Once your Workspace is created, go into the **Data** tab and under **Data Assets**, click **Create**. Name your asset `medquad_csv` and keep the type as **File** (uri_file). Hit next, then choose **From Local Files**. WorkspaceBlobStore should be checked -- keep it that way and select **Next** again. Go ahead and upload the repo's `custom_medic_chat/MaaS/medquadshort.jsonl` file here. Once created, go into the **Data Asset** and copy the **Datastore URI** -- this will be handy for our next step.
 
 Under the **Compute** tab, go to **Compute Instances** and create a new **Compute Instance**. For our purposes, you can select the lowest-tier SKU available.
 
