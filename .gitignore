@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 mytest.*
+
+# VS Code
+**/.vscode/
