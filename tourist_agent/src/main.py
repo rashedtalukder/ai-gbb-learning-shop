@@ -16,6 +16,7 @@ def main():
         credential=DefaultAzureCredential(),
         conn_str=AZ_FOUNDRY_PROJECT_CONNECTION_STRINGS,
     )
+    print(project_client)
 
     # [START create_agent_with_bing_grounding_tool]
     bing_connection = project_client.connections.get(
@@ -29,6 +30,9 @@ def main():
 
     # Create agent with the bing tool and process assistant run
     with project_client:
+        agent_list = project_client.agents.list_agents()
+        print(agent_list)
+
         agent = project_client.agents.create_agent(
             model=AZ_MODEL_DEPLOYMENT_NAME,
             name="tour-guide-assistant",
@@ -60,6 +64,10 @@ def main():
         if run.status == "failed":
             print(f"Run failed: {run.last_error}")
 
+        # Fetch and log all messages
+        messages = project_client.agents.list_messages(thread_id=thread.id)
+        print(f"Messages: {messages}")
+
         # Delete the thread
         project_client.agents.delete_thread(thread.id)
         print("Deleted thread")
@@ -67,10 +75,6 @@ def main():
         # Delete the assistant when done
         project_client.agents.delete_agent(agent.id)
         print("Deleted agent")
-
-        # Fetch and log all messages
-        messages = project_client.agents.list_messages(thread_id=thread.id)
-        print(f"Messages: {messages}")
 
 
 if __name__ == "__main__":
