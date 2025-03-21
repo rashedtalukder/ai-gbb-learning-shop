@@ -43,7 +43,7 @@ async def create_agent_and_process(project_client):
             connection_name=os.environ.get("BING_CONNECTION_NAME"))
         toolset.add(BingGroundingTool(connection_id=bing_connection.id))
     except Exception as e:
-        logging.warning(f"Failed to add Bing tool: {e}")
+        logging.warning("Failed to add Bing tool: %s", e)
 
     # Create agent
     agent = await project_client.agents.create_agent(
@@ -58,11 +58,11 @@ async def create_agent_and_process(project_client):
         toolset=toolset,
         headers={"x-ms-enable-preview": "true"},
     )
-    logging.info(f"Created agent, ID: {agent.id}")
+    logging.info("Created agent, ID: %s", agent.id)
 
     # Create thread and message
     thread = await project_client.agents.create_thread()
-    logging.info(f"Created thread, ID: {thread.id}")
+    logging.info("Created thread, ID: %s", thread.id)
 
     message = await project_client.agents.create_message(
         thread_id=thread.id,
