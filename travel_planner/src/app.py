@@ -118,6 +118,27 @@ async def main():
     if last_msg:
         print(f"Last Message: {last_msg.text.value}")
 
+    message = await project_client.agents.create_message(
+        thread_id=thread.id,
+        role=MessageRole.USER,
+        content=f"Those are great suggestions! Save that new itinerary to {SAVE_TO_PDF_FILE}.",
+    )
+
+    logging.info("Created message, ID: %s", message.id)
+
+    run = await project_client.agents.create_and_process_run(thread_id=thread.id, agent_id=gpt4o_agent.id)
+    if run.status == "failed":
+        print(f"Run failed: {run.last_error}")
+
+    # Get messages from the thread
+    messages = await project_client.agents.list_messages(thread_id=thread.id)
+    print(f"Messages: {messages}")
+
+    # Get the last message from the sender
+    last_msg = messages.get_last_text_message_by_role(MessageRole.AGENT)
+    if last_msg:
+        print(f"Last Message: {last_msg.text.value}")
+
     # Cleanup
     await project_client.agents.delete_thread(thread.id)
     logging.info("Thread deleted.")
