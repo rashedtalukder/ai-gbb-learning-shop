@@ -11,7 +11,8 @@ logging.basicConfig(level=logging.INFO)
 
 async def save_to_pdf(itinerary: str, file_path: str) -> str:
     """
-    Saves the provided travel itinerary as a PDF document.
+    Saves the agent generated travel itinerary as a PDF document.
+    Only invoked when the user requests to save the itinerary as a PDF.
 
     :param itinerary (str): The travel itinerary as markdown to save as a PDF document.
 
@@ -77,7 +78,7 @@ async def process_itinerary(doc_url: str) -> str:
                  "end_date": output["result"]["contents"][0]["fields"]["EndDate"]["valueDate"],
                  "existing_plans": output["result"]["contents"][0]["fields"]["ExistingPlans"]["valueString"]}
 
-    logging.info(" Generated Itinerary:\n\n %s\n\n", itinerary)
+    logging.info(" Processed Existing Itinerary:\n\n %s\n\n", itinerary)
     return json.dumps(itinerary)
 
 
