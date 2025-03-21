@@ -5,5 +5,4 @@ azure-ai-projects
 fpdf2
 aiohttp
 asyncio
-markdown2
-pdfkit
+markdown-pdf

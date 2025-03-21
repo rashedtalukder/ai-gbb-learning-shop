@@ -3,8 +3,7 @@ import json
 from typing import Any, Callable, Set
 import logging
 import config
-import markdown2
-import pdfkit
+from markdown_pdf import MarkdownPdf, Section
 
 logging.basicConfig(level=logging.INFO)
 
@@ -27,8 +26,10 @@ async def save_to_pdf(itinerary: str, file_path: str) -> str:
     written = False
     try:
         logging.info("Saving the itinerary as a PDF in %s...", file_path)
-        html_content = markdown2.markdown(itinerary)
-        written = pdfkit.from_string(html_content, file_path)
+
+        pdf = MarkdownPdf()
+        written = pdf.add_section(Section(itinerary))
+        pdf.save(file_path)
     except Exception as e:
         logging.error(
             "Failed to save the itinerary as a PDF. Error message:\n %s", e)
