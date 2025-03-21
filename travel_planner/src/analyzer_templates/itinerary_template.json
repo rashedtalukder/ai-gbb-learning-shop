@@ -1,0 +1,36 @@
+{
+  "description": "Travel itinerary analyzer. Extracts the trip name, destinations, start and end dates, and recommendations.",
+  "scenario": "document",
+  "fieldSchema": {
+    "fields": {
+      "TripName": {
+        "type": "string",
+        "method": "extract",
+        "description": "The title or main heading describing the travel plan."
+      },
+      "Destinations": {
+        "type": "string",
+        "method": "extract",
+        "description": "Locations included in the travel itinerary."
+      },
+      "StartDate": {
+        "type": "date",
+        "method": "extract",
+        "format": "ISO8601",
+        "description": "The start date of the trip."
+      },
+      "EndDate": {
+        "type": "date",
+        "method": "extract",
+        "format": "ISO8601",
+        "description": "The end date of the trip."
+      },
+      "ExistingPlans": {
+        "type": "string",
+        "method": "extract",
+        "description": "Text containing attractions, dining, and transportation details."
+      }
+    }
+  }
+}
+

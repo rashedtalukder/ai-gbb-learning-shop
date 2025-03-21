@@ -1,0 +1,9 @@
+azure-identity
+python-dotenv
+requests
+azure-ai-projects
+fpdf2
+aiohttp
+asyncio
+pypandoc==1.15
+pypandoc_binary
