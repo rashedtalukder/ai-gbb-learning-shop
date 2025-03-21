@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 async def save_to_pdf(itinerary: str, file_path: str) -> str:
     """
     Saves the agent generated travel itinerary as a PDF document.
-    Only invoked when the user requests to save the itinerary as a PDF.
+    Only invoked when the user explicitly requests to save the itinerary as a PDF.
 
     :param itinerary (str): The travel itinerary as markdown to save as a PDF document.
 

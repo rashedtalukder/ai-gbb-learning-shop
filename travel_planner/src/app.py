@@ -50,7 +50,7 @@ async def create_agent_and_process(project_client):
         model=AZ_MODEL_DEPLOYMENT_NAME,
         name="travel-recommender",
         instructions=(
-            "You are an AI travel assistant using GPT-4o. Analyze travel itineraries "
+            "You are an AI travel assistant. Analyze provided travel itineraries "
             "and generate engaging, personalized recommendations for destinations, "
             "activities, dining experiences, and efficient transportation methods. "
             "Be insightful and unique!"
