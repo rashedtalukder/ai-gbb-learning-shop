@@ -3,8 +3,8 @@ import json
 from typing import Any, Callable, Set
 import logging
 import config
-import pypandoc
-
+import markdown2
+import pdfkit
 
 logging.basicConfig(level=logging.INFO)
 
@@ -24,18 +24,16 @@ async def save_to_pdf(itinerary: str, file_path: str) -> str:
         logging.error("No itinerary provided.")
         return json.dumps({"error": "No itinerary provided."})
 
+    written = False
     try:
-        pdf_output = pypandoc.convert_text(itinerary, 'rst', format='md')
-
-        w = open(file_path, "w", encoding="utf-8")
-        write_status = w.write(pdf_output)
-        w.close()
+        logging.info("Saving the itinerary as a PDF in %s...", file_path)
+        html_content = markdown2.markdown(itinerary)
+        written = pdfkit.from_string(html_content, file_path)
     except Exception as e:
         logging.error(
             "Failed to save the itinerary as a PDF. Error message:\n %s", e)
-        write_status = 0
 
-    return json.dumps({"wrote_characters": write_status})
+    return json.dumps({"wrote": written})
 
 
 async def process_itinerary(doc_url: str) -> str:

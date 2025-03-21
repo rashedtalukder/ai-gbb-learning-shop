@@ -53,22 +53,8 @@ async def create_agent_and_process(project_client):
             "You are an AI travel assistant. Analyze provided travel itineraries "
             "and generate engaging, personalized recommendations for destinations, "
             "activities, dining experiences, and efficient transportation methods. "
-            "Be insightful and unique!"
-        ),
-        toolset=toolset,
-        headers={"x-ms-enable-preview": "true"},
-    )
-    logging.info("Created agent, ID: %s", agent.id)
-
-    # Create thread and message
-    thread = await project_client.agents.create_thread()
-    logging.info("Created thread, ID: %s", thread.id)
-
-    message = await project_client.agents.create_message(
-        thread_id=thread.id,
-        role=MessageRole.USER,
-        content=(
-            f"Suggest additional activities based on my existing itinerary at {ITINERARY_FILE}. "
+            "Only save the itinerary as a PDF when the user explicitly requests it and says where they want it saved."
+            "When asked to create travel plans based on existing itinerary, "
             "Create a new, concise travel itinerary with daily schedules for the entire travel duration, "
             "beginning on the the start date and ending on the end date. "
             "Provide recommendations for morning, afternoon, and evening activities, including dining options for"
@@ -98,6 +84,23 @@ async def create_agent_and_process(project_client):
             "- Evening: Dinner at [Restaurant Name](Restaurant URL)\n"
             "## Additional Information\n"
             "Include any additional information here."
+        ),
+        toolset=toolset,
+        headers={"x-ms-enable-preview": "true"},
+    )
+    logging.info("Created agent, ID: %s", agent.id)
+
+    # Create thread and message
+    thread = await project_client.agents.create_thread()
+    logging.info("Created thread, ID: %s", thread.id)
+
+    message = await project_client.agents.create_message(
+        thread_id=thread.id,
+        role=MessageRole.USER,
+        content=(
+            f"Suggest additional activities based on my existing itinerary at {ITINERARY_FILE}."
+            "I would like to receive the new itinerary as a PDF file."
+            f"Please save the new itinerary to {SAVE_TO_PDF_FILE}."
         ),
     )
     logging.info("Created message, ID: %s", message.id)

@@ -5,5 +5,5 @@ azure-ai-projects
 fpdf2
 aiohttp
 asyncio
-pypandoc==1.15
-pypandoc_binary
+markdown2
+pdfkit
