@@ -51,6 +51,9 @@ BING_CONNECTION_NAME="{{YOUR_BING_CONNECTION_NAME}}"
 ITINERARY_FILE_URL="https://{{YOUR_STORAGE_SUBDOMAIN}}.blob.core.windows.net/travel_itineraries/travel_Itinerary.pdf"
 ```
 
+### 2.4 Add API Access Permissions
+Go to your resource group in Azure Portal and add the Access Control (IAM) managed policy `Cognitive Services User` to your managed identity for your user.
+
 ## 3. Running the AI Pipeline
 In this application, we are using the Azure AI Agent service and utilizing a few of it's capabilities (e.g., function calling, Grounding with Bing, and message state storage) to autonomously handle different customer requests and recommend a rich travel experience based on their existing travel plans.
 
