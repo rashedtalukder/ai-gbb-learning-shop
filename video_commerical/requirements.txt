@@ -1,0 +1,6 @@
+# Azure Sora SDK dependencies
+python-dotenv>=1.0.0
+aiohttp>=3.8.4
+asyncio>=3.4.3
+requests>=2.31.0
+typing-extensions>=4.7.0
