@@ -38,7 +38,7 @@ This application simply calls the endpoint for generating a video. There are onl
 ### 3.1 Run the example
 The example takes arguments from your terminal. To generate a video, issue the command
 ```bash
-python examples/sora_example_cli.py --prompt="A Chihuahua eating a taco on a counter in a Taco Bell"
+python examples/cli.py --prompt="A Chihuahua eating a taco on a counter in a Taco Bell"
 ```
 
 ### 3.2 Open the generated and downloaded video
@@ -47,7 +47,7 @@ Go to the **outputs** folder and view the .mp4 video file. There is also a gif t
 ### 3.3 Other configurations
 To see what are the other available configuration arguments that the example can take, use
 ```bash
-python examples/sora_example_cli.py --help
+python examples/cli.py --help
 ```
 
 ## 4. Generate a video via Chainlit GUI
