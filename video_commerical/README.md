@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 
 ### 2.3 Configure Environment Variables
-Create a `.env` file in the root of your project and add the parameters below, filling out individual fields accordingly:
+Rename and modify the **sample.env** file or create a new `.env` file in the root of your project and add the parameters below, filling out individual fields accordingly:
 ```env
 AZURE_OPENAI_ENDPOINT="https://{{YOUR_AI_PROJECT_RESOURCE_NAME}}.services.ai.azure.com"
 AZURE_OPENAI_API_KEY="{{YOUR AOAI KEY}}
@@ -49,3 +49,17 @@ To see what are the other available configuration arguments that the example can
 ```bash
 python examples/sora_example_cli.py --help
 ```
+
+## 4. Generate a video via Chainlit GUI
+Using just a few lines of code, we can get a frontend up for our LLM application thanks to the Chainlit library. All of the application executes via event hooks that the library provides. You can read about those events in the [Chainlit API reference](https://docs.chainlit.io/api-reference/lifecycle-hooks/on-chat-start).
+
+### 4.1 Run the Chainlit example
+To run the example use the Chainlit CLI in terminal. The `-w` arguement watches for any changes in the code and reloads the application so you don't need to restart during development:
+```bash
+chainlit run examples/gui.py -w
+```
+
+Then go to **[http://localhost:8000](http://localhost:8000)" in your browser and enter a prompt for the video that you want to generate. It'll take a few seconds to generate it.
+
+### 4.2 Review the code
+Let's inspect how easy it is to make a richer demo by looking at the **examples/gui.py** file and seeing the lines that makes it all work.
