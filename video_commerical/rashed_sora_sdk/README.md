@@ -1,10 +1,10 @@
-# Azure Sora SDK
+# Rashed's Sora SDK
 
 A Python SDK for interacting with the Azure OpenAI Sora Video Generation API. This library provides a convenient interface for generating AI videos using OpenAI's Sora model on Azure.
 
 ## Features
 
-- Full support for all Azure Sora API endpoints
+- Full support for all current Azure OpenAI Sora API endpoints
 - Asynchronous operations for improved performance
 - Comprehensive error handling
 - Type hints for better development experience
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
 ## Example Script
 
-The `examples/sora_example.py` script provides a full-featured example of working with the Azure Sora SDK. It demonstrates a complete workflow from job creation to video download.
+The `examples/sora_example.py` script provides a full-featured example of working with Rashed's Sora SDK. It demonstrates a complete workflow from job creation to video download.
 
 ### Usage
 
@@ -142,4 +142,4 @@ For detailed API reference, please see the docstrings in the code or the officia
 
 ## License
 
-[MIT License](LICENSE)
+[Apache 2.0 License](LICENSE)
