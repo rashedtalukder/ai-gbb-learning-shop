@@ -23,6 +23,13 @@ conda activate ai-gbb-workshop
 pip install -r requirements.txt
 ```
 
+Install the included SDK separately
+```bash
+cd rashed_sora_sdk
+pip install -e .
+cd ..
+```
+
 ### 2.3 Configure Environment Variables
 Rename and modify the **sample.env** file or create a new `.env` file in the root of your project and add the parameters below, filling out individual fields accordingly:
 ```env
