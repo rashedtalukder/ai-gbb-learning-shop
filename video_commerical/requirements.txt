@@ -4,4 +4,3 @@ asyncio>=3.4.3
 requests>=2.31.0
 typing-extensions>=4.7.0
 chainlit>=2.5.5
-rashed-sora-sdk
