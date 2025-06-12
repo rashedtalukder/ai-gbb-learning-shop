@@ -1,129 +1,133 @@
-import json
+"""Weather MCP Server - A stateless MCP server that provides weather information."""
+
 import os
-from typing import Any, Dict
-
+from typing import Dict, Any, Optional
 import httpx
-import uvicorn
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from mcp.server.fastmcp import FastMCP, Context
 
-# Load environment variables
 load_dotenv()
 
-app = FastAPI(title="Weather MCP Server", version="1.0.0")
+# Initialize the FastMCP server with stateless HTTP configuration
+server = FastMCP(
+    name="Weather Server",
+    instructions="A server that provides current weather information for cities using OpenWeatherMap API.",
+    stateless_http=True,  # Enable stateless mode
+    json_response=True,   # Return JSON responses
+    streamable_http_path="/mcp/",  # Explicitly set with trailing slash
+)
 
 
-class WeatherRequest(BaseModel):
-    city: str
+@server.tool(
+    name="get_weather",
+    description="Get current weather information for a city using OpenWeatherMap API"
+)
+async def get_weather(city: str, country_code: str = "", ctx: Optional[Context] = None) -> Dict[str, Any]:
+    """
+    Get current weather for a city.
 
+    Args:
+        city: The name of the city to get weather for
+        country_code: Optional ISO 3166 country code (e.g., 'us', 'uk')
+        ctx: Context for logging and progress reporting
 
-class ToolRequest(BaseModel):
-    name: str
-    arguments: Dict[str, Any]
-
-
-@app.get("/")
-async def root():
-    """Health check endpoint."""
-    return {"message": "Weather MCP Server is running", "status": "healthy"}
-
-
-@app.get("/tools")
-async def list_tools():
-    """List available weather tools."""
-    return {
-        "tools": [
-            {
-                "name": "get_weather",
-                "description": "Get current weather information for a city",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "city": {
-                            "type": "string",
-                            "description": "City name (e.g., 'London' or 'New York,US')",
-                        }
-                    },
-                    "required": ["city"],
-                },
-            }
-        ]
-    }
-
-
-@app.post("/tools/call")
-async def call_tool(request: ToolRequest):
-    """Handle tool calls."""
-    if request.name != "get_weather":
-        raise HTTPException(
-            status_code=400, detail=f"Unknown tool: {request.name}")
-
-    city = request.arguments.get("city")
-    if not city:
-        raise HTTPException(
-            status_code=400, detail="City parameter is required")
-
-    try:
-        # Get weather data
-        weather_data = await get_weather_data(city)
-        return {
-            "content": [
-                {
-                    "type": "text",
-                    "text": json.dumps(weather_data, indent=2),
-                }
-            ]
-        }
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Internal server error: {str(e)}")
-
-
-@app.post("/weather")
-async def get_weather(request: WeatherRequest):
-    """Direct weather endpoint for simple requests."""
-    try:
-        weather_data = await get_weather_data(request.city)
-        return weather_data
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Internal server error: {str(e)}")
-
-
-async def get_weather_data(city: str) -> Dict[str, Any]:
-    """Fetch weather data from OpenWeatherMap API."""
+    Returns:
+        Dictionary containing weather information
+    """
+    # Get API key from environment
     api_key = os.getenv("OPENWEATHER_API_KEY")
     if not api_key:
-        raise ValueError(
-            "OPENWEATHER_API_KEY not found in environment variables")
+        error_msg = "OpenWeatherMap API key not found. Please set OPENWEATHER_API_KEY environment variable."
+        if ctx:
+            await ctx.error(error_msg)
+        raise ValueError("OpenWeatherMap API key not configured")
 
-    base_url = "https://api.openweathermap.org/data/2.5/weather"
+    # Build query string
+    if country_code:
+        query = f"{city},{country_code}"
+    else:
+        query = city
+
+    # API endpoint
+    url = "https://api.openweathermap.org/data/2.5/weather"
     params = {
-        "q": city,
+        "q": query,
         "appid": api_key,
-        "units": "standard",  # Default to standard units as requested
+        "units": "metric"  # Use metric units for temperature
     }
 
-    async with httpx.AsyncClient() as client:
-        try:
-            response = await client.get(base_url, params=params)
+    if ctx:
+        await ctx.info(f"Fetching weather data for {query}")
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, params=params)
             response.raise_for_status()
-            return response.json()
-        except httpx.HTTPStatusError as e:
-            if e.response.status_code == 404:
-                raise ValueError(f"City '{city}' not found")
-            else:
+
+            weather_data = response.json()
+
+            # Validate response structure
+            if "main" not in weather_data or "weather" not in weather_data or not weather_data["weather"]:
                 raise ValueError(
-                    f"Weather API error: {e.response.status_code}")
-        except Exception as e:
-            raise ValueError(f"Error fetching weather data: {str(e)}")
+                    "Invalid response structure from OpenWeatherMap API")
+
+            # Extract and format key information with safe access
+            result = {
+                "city": weather_data.get("name", "Unknown"),
+                "country": weather_data.get("sys", {}).get("country", "Unknown"),
+                "temperature": {
+                    "current": weather_data["main"]["temp"],
+                    "feels_like": weather_data["main"]["feels_like"],
+                    "min": weather_data["main"]["temp_min"],
+                    "max": weather_data["main"]["temp_max"],
+                    "unit": "°C"
+                },
+                "weather": {
+                    "main": weather_data["weather"][0]["main"],
+                    "description": weather_data["weather"][0]["description"]
+                },
+                "humidity": weather_data["main"]["humidity"],
+                "pressure": weather_data["main"]["pressure"],
+                "visibility": weather_data.get("visibility", "N/A"),
+                "wind": {
+                    "speed": weather_data.get("wind", {}).get("speed", 0),
+                    "direction": weather_data.get("wind", {}).get("deg", "N/A")
+                },
+                "clouds": weather_data.get("clouds", {}).get("all", 0),
+                "coordinates": {
+                    "latitude": weather_data.get("coord", {}).get("lat", 0),
+                    "longitude": weather_data.get("coord", {}).get("lon", 0)
+                }
+            }
+
+            if ctx:
+                await ctx.info(f"Successfully retrieved weather data for {result['city']}, {result['country']}")
+
+            return result
+
+    except httpx.HTTPStatusError as e:
+        error_msg = f"HTTP error {e.response.status_code} when fetching weather data"
+        if e.response.status_code == 404:
+            error_msg = f"City '{query}' not found"
+        elif e.response.status_code == 401:
+            error_msg = "Invalid API key"
+
+        if ctx:
+            await ctx.error(error_msg)
+        raise ValueError(error_msg)
+
+    except httpx.RequestError as e:
+        error_msg = f"Network error when fetching weather data: {str(e)}"
+        if ctx:
+            await ctx.error(error_msg)
+        raise ValueError(error_msg)
+
+    except Exception as e:
+        error_msg = f"Unexpected error: {str(e)}"
+        if ctx:
+            await ctx.error(error_msg)
+        raise ValueError(error_msg)
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("SERVER_PORT", 8000))
-    uvicorn.run(app, host="localhost", port=port)
+    server.run(transport="streamable-http")

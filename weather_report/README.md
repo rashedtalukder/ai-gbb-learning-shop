@@ -5,7 +5,9 @@ This workshop shows how to create an MCP (Model Context Protocol) client and ser
 - **MCP Server**: Provides weather data tools using OpenWeatherMap API
 - **MCP Client**: Uses Azure OpenAI to process natural language queries and call weather tools
 
-This server has an endpoint that the client can call to get a list of available MCP tools that the server provides. The client LLM will using function calling to pick from the available set of server tools to best resolve the user question if applicable. This server currently only has 1 tool `get_weather` -- which provides current weather for a specified city -- but the pattern in the _weather_server.py_ file allows for any-number of available tools and endpoints for the LLM to use.
+This server has an endpoint that the client LLM can call to get a list of available MCP tools that the server provides. The client LLM will get called again using function calling to pick from the available set of server tools to best resolve the user question if applicable. This server currently only has 1 tool `get_weather` -- which provides current weather for a specified city.
+
+The server essentially acts as a proxy that adds additional context that an LLM would need in order to perform a tool call. This enables the MCP server provider to control the lifecycle and maintenance burden of the server instead of the client maintaining the tool.
 
 ## Setup
 0. **Create Conda Environment**
@@ -32,17 +34,19 @@ If you have and are happy with your existing conda environment, skip this step. 
 
 ## Usage
 
-### Start weather MCP server
-This will need to be run in it's own terminal session. We'll call it "terminal session A."
-```bash
-python server.py
-```
+### Run the demo
+The command below executes provided demo where it 
+   1. Start the weather MCP server
+   2. Waits for it to be ready
+   3. Run sample weather queries to test and view results
+   4. Allow interactive queries from the user
+   5. Clean up when done
 
-### Run the client demo
-In a separate terminal session (call it terminal session B), run the command below to run the provided demo of the client code and library. The demo will run through two preset example queries for weather in a particular city and then take your input.
 ```bash
 python demo.py
 ```
+
+To stop the user input, type **exit** or **quit**
 
 ## Example Queries
 
