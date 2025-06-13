@@ -128,7 +128,7 @@ class WeatherMCPClient:
         temp_fahrenheit = self.celsius_to_fahrenheit(temp_celsius)
 
         # Format response
-        return f"{actual_city}: {temp_fahrenheit:.1f}°F, {condition}"
+        return f"The weather in {actual_city} is {temp_fahrenheit:.1f}°F and {condition}."
 
 
 async def test_mcp_connection():
