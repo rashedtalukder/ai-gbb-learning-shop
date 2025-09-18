@@ -1,0 +1,18 @@
+[project]
+name = "mcp-registry"
+version = "0.1.0"
+description = ""
+authors = ["johncarroll <>"]
+requires-python = ">=3.10"
+dependencies = [
+    "httpx",
+    "fastmcp",
+    "langgraph",
+    "langchain-mcp-adapters",
+    "langchain-openai",
+    "azure-identity",
+    "langchain-community"
+]
+
+[tool.uv]
+# uv-specific settings can go here
